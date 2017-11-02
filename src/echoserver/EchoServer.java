@@ -16,8 +16,10 @@ public class EchoServer {
 
 	private void start() throws IOException, InterruptedException {
 		ServerSocket serverSocket = new ServerSocket(PORT_NUMBER);
+		
 		while (true) {
 			Socket socket = serverSocket.accept();
+			myServerThreadFactory factory = new myServerThreadFactory(socket);
 			InputStream inputStream = socket.getInputStream();
 			OutputStream outputStream = socket.getOutputStream();
 			int b;
@@ -25,5 +27,27 @@ public class EchoServer {
 				outputStream.write(b);
 			}
 		}
+	}
+	
+	public void createInputThread(myServerThreadFactory f) {
+		f.newThread(
+				new Runnable() {
+					public void run(){
+						
+					}
+				}
+		);
+	}
+	public void createOutputThread(myServerThreadFactory f) {
+		f.newThread(
+				new Runnable() {
+					public void run(){
+						
+//						while ((b = inputStream.read()) != -1) {
+//							outputStream.write(b);
+//						}
+					}
+				}
+		);
 	}
 }
