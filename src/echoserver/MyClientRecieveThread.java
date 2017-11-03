@@ -29,7 +29,13 @@ public class MyClientRecieveThread extends Thread{
 			}
 			//flush any remaining data
 			System.out.flush();
-			socket.close();
+			System.out.println("it got here with OutputShutdown: " + socket.isOutputShutdown());
+			if(socket.isOutputShutdown()){
+				socket.close();
+				System.out.println("This happened: " + socket.isClosed());
+			}
+			System.out.println("then it got here");
+
 		} catch (UnknownHostException e) {
 			System.out.println(e);
 		} catch (IOException e) {

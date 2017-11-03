@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class EchoServer {
 	public static final int PORT_NUMBER = 6013;
@@ -16,17 +18,16 @@ public class EchoServer {
 
 	private void start() throws IOException, InterruptedException {
 		ServerSocket serverSocket = new ServerSocket(PORT_NUMBER);
+		ExecutorService service = Executors.newCachedThreadPool();
+		Thread instance = null;
 		
 		while (true) {
 			Socket socket = serverSocket.accept();
-			MyServerThreadFactory inFactory = new MyServerThreadFactory(socket, 1);
-			MyServerThreadFactory outFactory = new MyServerThreadFactory(socket, 0, null);
-			InputStream inputStream = socket.getInputStream();
-			OutputStream outputStream = socket.getOutputStream();
-			int b;
-			while ((b = inputStream.read()) != -1) {
-				outputStream.write(b);
-			}
+
+			instance = new MyServerThread(socket);
+			
+			service.submit(instance);
+			
 		}
 	}
 }
