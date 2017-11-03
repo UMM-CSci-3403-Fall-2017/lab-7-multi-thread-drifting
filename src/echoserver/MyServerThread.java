@@ -26,7 +26,6 @@ public class MyServerThread extends Thread{
 			
 			while((b=inStream.read()) != -1){
 				outStream.write(b);
-				System.out.write(b);
 			}
 
 			//flush remaining data
