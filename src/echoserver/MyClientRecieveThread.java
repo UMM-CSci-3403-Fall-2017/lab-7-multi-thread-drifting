@@ -22,17 +22,13 @@ public class MyClientRecieveThread extends Thread{
 		//open input stream
 		//write input stream to System.out
 		try {
-			//Socket socket = sock;
 			InputStream inStream = sock.getInputStream();
 			while((b=inStream.read()) != -1){
 				System.out.write(b);
 			}
 			//flush any remaining data
-				System.err.println("it got here with OutputShutdown: " + sock.isOutputShutdown());
-				System.err.println("it got here with InputShutdown: " + sock.isInputShutdown());
-				System.out.flush();
-				sock.close();
-				System.err.println("This happened: " + sock.isClosed());
+			System.out.flush();
+			sock.close();
 
 		} catch (UnknownHostException e) {
 			System.err.println(e);

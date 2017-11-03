@@ -21,21 +21,8 @@ public class EchoClient {
 		
 		Thread send = new MyClientSendThread(socket);
 		Thread receive = new MyClientRecieveThread(socket);
-//		ExecutorService service = Executors.newFixedThreadPool(2);
 		send.start();
 		receive.start();
 	}
-	
-//	private void start() throws IOException {
-//		Socket socket = new Socket("localhost", PORT_NUMBER);
-//		InputStream socketInputStream = socket.getInputStream();
-//		OutputStream socketOutputStream = socket.getOutputStream();
-//		int readByte;
-//		while ((readByte = System.in.read()) != -1) {
-//			socketOutputStream.write(readByte);
-//			int socketByte = socketInputStream.read();
-//			System.out.write(socketByte);
-//		}
-//		System.out.flush();
-//	}
+
 }
