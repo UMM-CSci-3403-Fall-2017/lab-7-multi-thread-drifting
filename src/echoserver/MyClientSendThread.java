@@ -29,7 +29,6 @@ public class MyClientSendThread extends Thread{
 			}
 			outStream.flush();
 			socket.shutdownOutput();
-//			System.out.println("This happened: " + socket.isOutputShutdown());
 		} catch (UnknownHostException e) {
 			System.out.println(e);
 		} catch (IOException e) {
