@@ -22,24 +22,22 @@ public class MyClientRecieveThread extends Thread{
 		//open input stream
 		//write input stream to System.out
 		try {
-			Socket socket = sock;
-			InputStream inStream = inStream = socket.getInputStream();
+			//Socket socket = sock;
+			InputStream inStream = sock.getInputStream();
 			while((b=inStream.read()) != -1){
 				System.out.write(b);
 			}
 			//flush any remaining data
-			System.out.flush();
-			System.out.println("it got here with OutputShutdown: " + socket.isOutputShutdown());
-			if(socket.isOutputShutdown()){
-				socket.close();
-				System.out.println("This happened: " + socket.isClosed());
-			}
-			System.out.println("then it got here");
+				System.err.println("it got here with OutputShutdown: " + sock.isOutputShutdown());
+				System.err.println("it got here with InputShutdown: " + sock.isInputShutdown());
+				System.out.flush();
+				sock.close();
+				System.err.println("This happened: " + sock.isClosed());
 
 		} catch (UnknownHostException e) {
-			System.out.println(e);
+			System.err.println(e);
 		} catch (IOException e) {
-			System.out.println(e);
+			System.err.println(e);
 		}
 		
 	}

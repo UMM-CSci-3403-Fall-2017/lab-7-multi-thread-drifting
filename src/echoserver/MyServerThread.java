@@ -18,15 +18,24 @@ public class MyServerThread extends Thread{
 	
 	public void run(){
 		int b;
+		int bcounter = 0;
 		try {
 			InputStream inStream = sock.getInputStream();
 			OutputStream outStream = sock.getOutputStream();
 			
 			while((b=inStream.read()) != -1){
 				outStream.write(b);
+				bcounter++;
+				System.out.write(b);
+//				if(sock.isOutputShutdown()) System.out.println("Socket output is shutdown");
+//				if(sock.isInputShutdown()) System.out.println("Socket input is shutdown");
 			}
 
+			System.out.println("it sent this many: " + bcounter);
+			System.out.println("it got here");
 			outStream.flush();
+			System.out.println("then it got here");
+			sock.close();
 
 		} catch (IOException e) {
 			System.out.println(e);

@@ -21,9 +21,9 @@ public class EchoClient {
 		
 		Thread send = new MyClientSendThread(socket);
 		Thread receive = new MyClientRecieveThread(socket);
-		ExecutorService service = Executors.newFixedThreadPool(2);
-		service.submit(send);
-		service.submit(receive);
+//		ExecutorService service = Executors.newFixedThreadPool(2);
+		send.start();
+		receive.start();
 	}
 	
 //	private void start() throws IOException {

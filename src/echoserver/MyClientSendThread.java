@@ -17,22 +17,28 @@ public class MyClientSendThread extends Thread{
 	
 	
 	public void run(){
-		Socket socket = null;
+		//Socket socket = null;
 		OutputStream outStream = null;
 		int b;
+		int bcount = 0;
 		
 		try {
-			socket = sock;
-			outStream = socket.getOutputStream();
+		//	socket = sock;
+			outStream = sock.getOutputStream();
 			while((b=System.in.read()) != -1){
 				outStream.write(b);
+				bcount++;
 			}
 			outStream.flush();
-			socket.shutdownOutput();
+			sock.shutdownOutput();
+//			System.out.println("It got here with socket output shutdown: " + socket.isOutputShutdown());
+//			System.out.println("It got here with socket input shutdown: " + socket.isInputShutdown());
+//			System.out.println("It got here with socket: " + socket.isClosed());
+//			System.out.println("It sent this many: " + bcount);
 		} catch (UnknownHostException e) {
-			System.out.println(e);
+			System.err.println(e);
 		} catch (IOException e) {
-			System.out.println(e);
+			System.err.println(e);
 		}
 		
 	}
