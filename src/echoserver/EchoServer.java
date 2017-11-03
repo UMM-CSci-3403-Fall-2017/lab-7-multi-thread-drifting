@@ -19,7 +19,8 @@ public class EchoServer {
 		
 		while (true) {
 			Socket socket = serverSocket.accept();
-			myServerThreadFactory factory = new myServerThreadFactory(socket);
+			MyServerThreadFactory inFactory = new MyServerThreadFactory(socket, 1);
+			MyServerThreadFactory outFactory = new MyServerThreadFactory(socket, 0, null);
 			InputStream inputStream = socket.getInputStream();
 			OutputStream outputStream = socket.getOutputStream();
 			int b;
@@ -27,27 +28,5 @@ public class EchoServer {
 				outputStream.write(b);
 			}
 		}
-	}
-	
-	public void createInputThread(myServerThreadFactory f) {
-		f.newThread(
-				new Runnable() {
-					public void run(){
-						
-					}
-				}
-		);
-	}
-	public void createOutputThread(myServerThreadFactory f) {
-		f.newThread(
-				new Runnable() {
-					public void run(){
-						
-//						while ((b = inputStream.read()) != -1) {
-//							outputStream.write(b);
-//						}
-					}
-				}
-		);
 	}
 }

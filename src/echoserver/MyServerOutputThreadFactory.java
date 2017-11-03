@@ -2,7 +2,7 @@ package echoserver;
 
 import java.util.concurrent.ThreadFactory;
 
-public class myServerOutputThreadFactory implements ThreadFactory{
+public class MyServerOutputThreadFactory implements ThreadFactory{
 	private String name;
 	private int counter = 0;
 	public void CustomThreadFactory(String name){
@@ -10,7 +10,7 @@ public class myServerOutputThreadFactory implements ThreadFactory{
 	}
 	@Override
 	public Thread newThread(Runnable r){
-		myServerOutputThread t = new myServerOutputThread();
+		MyServerOutputThread t = new MyServerOutputThread(null, null);
 		counter++;
 		return t;
 	}
